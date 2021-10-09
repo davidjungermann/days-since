@@ -13,10 +13,10 @@ const App = () => {
       <h1 className="counter">{counter}</h1>
       <div className="increase-decrease">
         <div className="check" onClick={() => setCounter(counter + 1)}>
-          <Emoji symbol="✅" fontSize={75} />
+          <Emoji symbol="✅" fontSize={100} />
         </div>
         <div className="cross" onClick={() => setCounter(0)}>
-          <Emoji symbol="❌" fontSize={75} />
+          <Emoji symbol="❌" fontSize={100} />
         </div>
       </div>
     </div>
