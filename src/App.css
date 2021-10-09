@@ -34,14 +34,20 @@
   font-size: 200px;
 }
 
-.cross {
+.emoji-container {
   margin-left: 2em;
+  margin-right: 2em;
   order: 2;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
 }
 
-.check {
-  margin-right: 2em;
-  order: 1;
+.emoji-container:hover {
+  opacity: 0.5;
 }
 
 @media (prefers-reduced-motion: no-preference) {
