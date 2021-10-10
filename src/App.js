@@ -1,9 +1,19 @@
 import "./App.css";
 import Emoji from "./components/emoji/Emoji";
-import { useState } from "react";
+import getCounters from "./api/counterRepository";
+import { useState, useEffect } from "react";
 
 const App = () => {
   const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      const counterList = await getCounters();
+      // TODO: Change this when implementing users
+      setCounter(counterList[0].value);
+    })();
+  }, []);
+
   return (
     <div className="App">
       <div className="title">
