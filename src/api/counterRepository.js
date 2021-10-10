@@ -1,11 +1,23 @@
 import db from "../db/firestore";
-import { collection, getDocs } from "firebase/firestore/lite";
+import {
+  doc,
+  collection,
+  getDocs,
+  updateDoc,
+  getDoc,
+} from "firebase/firestore/lite";
 
-const getCounters = async () => {
-  const countersCol = collection(db, "counters");
-  const counterSnapshot = await getDocs(countersCol);
-  const counterList = counterSnapshot.docs.map((doc) => doc.data());
-  return counterList;
+const getCounterValue = async () => {
+  const counterRef = doc(db, "counters", "counter");
+  const counterDoc = await getDoc(counterRef);
+  return counterDoc.get("value");
 };
 
-export default getCounters;
+const setCounterValue = async (newValue) => {
+  const counterRef = doc(db, "counters", "counter");
+  await updateDoc(counterRef, {
+    value: newValue,
+  });
+};
+
+export { getCounterValue, setCounterValue };
