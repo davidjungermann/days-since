@@ -1,7 +1,10 @@
-import "./App.css";
-import Emoji from "./components/emoji/Emoji";
 import { getCounterValue, setCounterValue } from "./api/counterRepository";
 import { useState, useEffect } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+import db from "./db/firestore";
+import Emoji from "./components/emoji/Emoji";
+
+import "./App.css";
 
 const App = () => {
   const [counter, setCounter] = useState(null);
@@ -11,6 +14,11 @@ const App = () => {
       const counterValue = await getCounterValue();
       setCounter(counterValue);
     })();
+
+    const unsubscribe = onSnapshot(doc(db, "counters", "counter"), (doc) => {
+      setCounter(doc.get("value"));
+    });
+    return () => unsubscribe();
   }, []);
 
   const handleIncrement = () => {
