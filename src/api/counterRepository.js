@@ -1,11 +1,5 @@
 import db from "../db/firestore";
-import {
-  doc,
-  collection,
-  getDocs,
-  updateDoc,
-  getDoc,
-} from "firebase/firestore/lite";
+import { doc, updateDoc, getDoc } from "firebase/firestore/lite";
 
 const getCounterValue = async () => {
   const counterRef = doc(db, "counters", "counter");

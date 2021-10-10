@@ -4,7 +4,7 @@ import { getCounterValue, setCounterValue } from "./api/counterRepository";
 import { useState, useEffect } from "react";
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(null);
 
   useEffect(() => {
     (async () => {
