@@ -15,6 +15,7 @@ const App = () => {
       setCounter(counterValue);
     })();
 
+    // TODO: Should be placed in the repo, but don't know how
     const unsubscribe = onSnapshot(doc(db, "counters", "counter"), (doc) => {
       setCounter(doc.get("value"));
     });
