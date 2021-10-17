@@ -1,4 +1,4 @@
-import db from "../db/firestore";
+import { db } from "../db/firestore";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 
 const getCounterValue = async () => {
