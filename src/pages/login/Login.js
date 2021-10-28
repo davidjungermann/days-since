@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { auth } from "../../db/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { Navigate, useNavigate } from "react-router-dom";
 import { signInUser } from "../../auth/authServices";
 import "./Login.css";
 
-const Login = () => {
+const Login = ({ user, loading }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, loading, error] = useAuthState(auth);
-
-  const history = useHistory();
+  const navigate = useNavigate();
+  console.log(user);
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
       return;
     }
-    if (user) history.replace("/counter");
-  }, [user, loading, history]);
+    if (user) {
+      console.log(user);
+      navigate("/counter");
+    }
+  }, [user, loading]);
 
   return (
     <div className="login">
@@ -43,11 +43,11 @@ const Login = () => {
           Login
         </button>
         <div>
-          <Link to="/reset">Forgot Password</Link>
+          <Navigate to="/reset">Forgot Password</Navigate>
         </div>
         <p></p>
         <div>
-          Don't have an account? <Link to="/register">Register</Link> now.
+          Don't have an account? <Navigate to="/login">Register</Navigate> now.
         </div>
       </div>
     </div>
