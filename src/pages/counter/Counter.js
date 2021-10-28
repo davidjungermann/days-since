@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../db/firestore';
 import Emoji from '../../components/emoji/Emoji';
-
+import Logout from '../../components/logout/Logout';
 import './Counter.css';
 
 const Counter = () => {
@@ -34,6 +34,7 @@ const Counter = () => {
   return (
     <React.Fragment>
       <div className="title">
+        <Logout></Logout>
         <h1 className="heading">Days Since 🔥</h1>
         <Emoji symbol="" fontSize={50} />
       </div>
