@@ -20,7 +20,7 @@ const Register = () => {
 
   useEffect(() => {
     if (loading) return;
-    if (user) navigate("/counter");
+    if (user) navigate("counter");
   }, [user, loading]);
 
   return (
@@ -44,7 +44,7 @@ const Register = () => {
           Register
         </button>
         <div>
-          Already have an account? <Link to="/login">Login</Link> now.
+          Already have an account? <Link to="login">Login</Link> now.
         </div>
       </div>
     </div>

@@ -9,9 +9,9 @@ const App = () => {
     <div className="App">
       <Router basename="/days-since">
         <Routes>
-          <Route path="/login" exact element={<Login />} />
-          <Route path="/register" exact element={<Register />} />
-          <Route path="/counter" exact element={<Counter />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="counter" element={<Counter />} />
         </Routes>
       </Router>
     </div>

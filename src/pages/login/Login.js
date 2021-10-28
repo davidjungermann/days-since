@@ -17,7 +17,7 @@ const Login = () => {
     }
     if (user) {
       console.log(user);
-      navigate("/counter");
+      navigate("counter");
     }
   }, [user, loading]);
 
@@ -45,11 +45,11 @@ const Login = () => {
           Login
         </button>
         <div>
-          <Link to="/reset">Forgot Password</Link>
+          <Link to="reset">Forgot Password</Link>
         </div>
         <p></p>
         <div>
-          Don't have an account? <Link to="/login">Register</Link> now.
+          Don't have an account? <Link to="login">Register</Link> now.
         </div>
       </div>
     </div>
