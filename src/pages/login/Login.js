@@ -17,7 +17,7 @@ const Login = () => {
       return;
     }
     if (user) history.replace("/counter");
-  }, [user, loading]);
+  }, [user, loading, history]);
 
   return (
     <div className="login">
@@ -45,6 +45,7 @@ const Login = () => {
         <div>
           <Link to="/reset">Forgot Password</Link>
         </div>
+        <p></p>
         <div>
           Don't have an account? <Link to="/register">Register</Link> now.
         </div>
