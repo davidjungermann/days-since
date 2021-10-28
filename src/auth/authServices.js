@@ -1,14 +1,9 @@
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
-import { auth } from "../db/firestore";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '../db/firestore';
 
 const createUser = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in
       const user = userCredential.user;
     })
     .catch((error) => {
@@ -29,14 +24,10 @@ const signInUser = (email, password) => {
     });
 };
 
-const signOutUser = (email, password) => {
+const signOutUser = () => {
   signOut(auth)
-    .then(() => {
-      // Sign-out successful.
-    })
-    .catch((error) => {
-      // An error happened.
-    });
+    .then(() => {})
+    .catch((error) => {});
 };
 
 export { createUser, signInUser, signOutUser };

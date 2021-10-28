@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { signInUser } from '../../auth/authServices';
 import './Login.css';
 
-const Login = (user, loading) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
