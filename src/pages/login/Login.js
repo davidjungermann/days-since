@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../db/firestore";
+import { useNavigate, Link } from "react-router-dom";
 import { signInUser } from "../../auth/authServices";
 import "./Login.css";
 
-const Login = ({ user, loading }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  console.log(user);
+  const [user, loading] = useAuthState(auth);
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
@@ -43,11 +45,11 @@ const Login = ({ user, loading }) => {
           Login
         </button>
         <div>
-          <Navigate to="/reset">Forgot Password</Navigate>
+          <Link to="/reset">Forgot Password</Link>
         </div>
         <p></p>
         <div>
-          Don't have an account? <Navigate to="/login">Register</Navigate> now.
+          Don't have an account? <Link to="/login">Register</Link> now.
         </div>
       </div>
     </div>

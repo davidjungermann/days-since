@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../db/firestore";
+import { useNavigate, Link } from "react-router-dom";
 import { createUser } from "../../auth/authServices";
 import "./Register.css";
 
-const Register = ({ user, loading }) => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [user, loading] = useAuthState(auth);
 
   const navigate = useNavigate();
 
@@ -41,7 +44,7 @@ const Register = ({ user, loading }) => {
           Register
         </button>
         <div>
-          Already have an account? <Navigate to="/login">Login</Navigate> now.
+          Already have an account? <Link to="/login">Login</Link> now.
         </div>
       </div>
     </div>
