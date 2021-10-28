@@ -11,7 +11,7 @@ const App = () => {
         <Routes>
           <Route path="/login" exact element={<Login />} />
           <Route path="/register" exact element={<Register />} />
-          <Route path="/counter" exact component={Counter} />
+          <Route path="/counter" exact element={<Counter />} />
         </Routes>
       </Router>
     </div>

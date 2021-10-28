@@ -8,7 +8,7 @@ import "./Counter.css";
 
 const Counter = () => {
   const [counter, setCounter] = useState(null);
-
+  console.log("Kommer hit?");
   useEffect(() => {
     (async () => {
       const counterValue = await getCounterValue();
