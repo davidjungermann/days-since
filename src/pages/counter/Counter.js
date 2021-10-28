@@ -1,14 +1,13 @@
-import { getCounterValue, setCounterValue } from "../../api/counterRepository";
-import React, { useState, useEffect } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
-import { db } from "../../db/firestore";
-import Emoji from "../../components/emoji/Emoji";
+import { getCounterValue, setCounterValue } from '../../api/counterRepository';
+import React, { useState, useEffect } from 'react';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../../db/firestore';
+import Emoji from '../../components/emoji/Emoji';
 
-import "./Counter.css";
+import './Counter.css';
 
 const Counter = () => {
   const [counter, setCounter] = useState(null);
-  console.log("Kommer hit?");
   useEffect(() => {
     (async () => {
       const counterValue = await getCounterValue();
@@ -16,8 +15,8 @@ const Counter = () => {
     })();
 
     // TODO: Should be placed in the repo, but don't know how
-    const unsubscribe = onSnapshot(doc(db, "counters", "counter"), (doc) => {
-      setCounter(doc.get("value"));
+    const unsubscribe = onSnapshot(doc(db, 'counters', 'counter'), (doc) => {
+      setCounter(doc.get('value'));
     });
     return () => unsubscribe();
   }, []);

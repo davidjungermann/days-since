@@ -10,7 +10,6 @@ import Logout from './components/logout/Logout';
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
-  console.log(user);
   return (
     <div className="App">
       <Logout></Logout>
@@ -18,7 +17,7 @@ const App = () => {
         <Routes>
           <Route path="login" element={<Login user={user} loading={loading} />} />
           <Route path="register" element={<Register user={user} loading={loading} />} />
-          <PrivateRoute path="counter" element={<Counter />} authed={user} />
+          <PrivateRoute path="counter" element={<Counter />} user={user} />
         </Routes>
       </Router>
     </div>
