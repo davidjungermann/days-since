@@ -1,27 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../db/firestore";
-import { useNavigate, Link } from "react-router-dom";
-import { createUser } from "../../auth/authServices";
-import "./Register.css";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { createUser } from '../../auth/authServices';
+import './Register.css';
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [user, loading] = useAuthState(auth);
-
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
 
   const register = () => {
-    if (!name) alert("Please enter name");
+    if (!name) alert('Please enter name');
     createUser(email, password);
   };
-
-  useEffect(() => {
-    if (loading) return;
-    if (user) navigate("counter");
-  }, [user, loading]);
 
   return (
     <div className="register">

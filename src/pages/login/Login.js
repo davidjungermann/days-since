@@ -1,25 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../db/firestore";
-import { useNavigate, Link } from "react-router-dom";
-import { signInUser } from "../../auth/authServices";
-import "./Login.css";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { signInUser } from '../../auth/authServices';
+import './Login.css';
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const [user, loading] = useAuthState(auth);
-  useEffect(() => {
-    if (loading) {
-      // maybe trigger a loading screen
-      return;
-    }
-    if (user) {
-      console.log(user);
-      navigate("counter");
-    }
-  }, [user, loading]);
+const Login = (user, loading) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <div className="login">
@@ -38,10 +24,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button
-          className="login__btn"
-          onClick={() => signInUser(email, password)}
-        >
+        <button className="login__btn" onClick={() => signInUser(email, password)}>
           Login
         </button>
         <div>
@@ -55,4 +38,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;
