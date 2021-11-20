@@ -34,7 +34,6 @@ const Counter = () => {
   return (
     <React.Fragment>
       <div className="title">
-        <Logout></Logout>
         <h1 className="heading">Days Since 🔥</h1>
         <Emoji symbol="" fontSize={50} />
       </div>

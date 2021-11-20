@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from './db/firestore';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Counter from './pages/counter/Counter';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './db/firestore';
 import './App.css';
 
 const App = () => {
@@ -12,13 +12,9 @@ const App = () => {
     <div className="App">
       <Router basename="/days-since">
         <Routes>
-          <Route path="login" element={<Login user={user} loading={loading} />} />
-          <Route path="register" element={<Register user={user} loading={loading} />} />
-          <Route
-            path="counter"
-            element={user ? <Counter /> : <Navigate to="/login" />}
-            user={user}
-          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Counter />} />
         </Routes>
       </Router>
     </div>

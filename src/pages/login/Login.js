@@ -32,7 +32,7 @@ const Login = () => {
         </div>
         <p></p>
         <div>
-          Don't have an account? <Link to="login">Register</Link> now.
+          Don't have an account? <Link to="/register">Register</Link> now.
         </div>
       </div>
     </div>
