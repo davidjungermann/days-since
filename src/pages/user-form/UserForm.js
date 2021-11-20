@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
 
 const UserForm = ({ mode, handleAuthentication }) => {
-  const [formState] = useState(mode === 'login' ? 'Sign In' : 'Sign Up');
+  const [formState] = useState(mode === 'sign-in' ? 'Sign In' : 'Sign Up');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

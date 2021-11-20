@@ -1,30 +1,60 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Counter from './pages/counter/Counter';
 import UserForm from './pages/user-form/UserForm';
 import { auth } from './db/firestore';
-import { signInUser, signUpUser, signOutUser } from './auth/authServices';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUser } from './api/userRepository';
 import './App.css';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect } from 'react';
 
 const App = () => {
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         navigate('/');
       } else {
-        navigate('/login');
+        navigate('/sign-up');
       }
     });
     return () => unsubscribe();
   }, [navigate]);
 
   const handleAuthentication = (mode, email, password) => {
-    mode === 'login' ? signInUser(auth, email, password) : signUpUser(auth, email, password);
+    mode === 'sign-in'
+      ? handleSignInUser(auth, email, password)
+      : handleSignUpUser(auth, email, password);
+  };
+
+  const handleSignUpUser = (auth, email, password) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        createUser(response.user);
+      })
+      // TODO: Implement error handling
+      .catch((error) => {
+        console.log(error.code, error.message);
+      });
+  };
+
+  const handleSignInUser = (auth, email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        return response.user;
+      })
+      .catch((error) => {
+        // TODO: Implement error handling
+        console.log(error.code, error.message);
+      });
   };
 
   const handleSignOut = () => {
-    signOutUser(auth);
+    signOut(auth)
+      .then(() => {})
+      // TODO: Implement error handling
+      .catch((error) => {});
   };
 
   return (
@@ -33,12 +63,12 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Counter handleSignOut={handleSignOut} />} />
           <Route
-            path="/login"
-            element={<UserForm mode="login" handleAuthentication={handleAuthentication} />}
+            path="/sign-in"
+            element={<UserForm mode="sign-in" handleAuthentication={handleAuthentication} />}
           />
           <Route
-            path="/register"
-            element={<UserForm mode="register" handleAuthentication={handleAuthentication} />}
+            path="/sign-up"
+            element={<UserForm mode="sign-up" handleAuthentication={handleAuthentication} />}
           />
         </Routes>
       </>
