@@ -1,10 +1,11 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../db/firestore';
 
-const createUser = (email, password) => {
+const signUpUser = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      return user;
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -17,7 +18,7 @@ const signInUser = (email, password) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      console.log(user);
+      return user;
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -31,4 +32,4 @@ const signOutUser = () => {
     .catch((error) => {});
 };
 
-export { createUser, signInUser, signOutUser };
+export { signUpUser, signInUser, signOutUser };
