@@ -1,5 +1,12 @@
 import { db } from '../db/firestore';
-import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { doc, collection, updateDoc, getDoc, addDoc } from 'firebase/firestore';
+
+const createCounter = async (uid) => {
+  await addDoc(collection(db, 'counters'), {
+    value: 0,
+    user: uid,
+  });
+};
 
 const getCounterValue = async () => {
   const counterRef = doc(db, 'counters', 'counter');
@@ -14,4 +21,4 @@ const setCounterValue = async (newValue) => {
   });
 };
 
-export { getCounterValue, setCounterValue };
+export { createCounter, getCounterValue, setCounterValue };

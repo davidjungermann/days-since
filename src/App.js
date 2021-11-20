@@ -7,6 +7,7 @@ import { createUser } from './api/userRepository';
 import './App.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect } from 'react';
+import { createCounter } from './api/counterRepository';
 
 const App = () => {
   const [user] = useAuthState(auth);
@@ -32,6 +33,7 @@ const App = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((response) => {
         createUser(response.user);
+        createCounter(response.user.uid);
       })
       // TODO: Implement error handling
       .catch((error) => {
