@@ -1,14 +1,20 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Counter from './pages/counter/Counter';
 import UserForm from './pages/user-form/UserForm';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './db/firestore';
 import { signInUser, signUpUser } from './auth/authServices';
 import './App.css';
-import PrivateRoute from './components/private-route/PrivateRoute';
 
 const App = () => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      navigate('/login');
+    }
+  });
 
   const handleAuthentication = (mode, email, password) => {
     mode === 'login' ? signInUser(auth, email, password) : signUpUser(auth, email, password);
