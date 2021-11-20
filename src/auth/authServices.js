@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 import { auth } from '../db/firestore';
 
 const signUpUser = (auth, email, password) => {
-  console.log('Sign up!');
+  console.log(email, password);
   createUserWithEmailAndPassword(auth, email, password)
     .then((response) => {
       console.log(response);
