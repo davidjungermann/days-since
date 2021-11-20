@@ -6,7 +6,7 @@ import Emoji from '../../components/emoji/Emoji';
 import Button from 'react-bootstrap/Button';
 import './Counter.css';
 
-const Counter = ({ handleSignOut }) => {
+const Counter = ({ handleSignOut, auth }) => {
   const [counter, setCounter] = useState(null);
   useEffect(() => {
     (async () => {
