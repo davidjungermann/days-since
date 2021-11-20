@@ -7,8 +7,8 @@ import { signInUser, signUpUser } from './auth/authServices';
 import './App.css';
 
 const App = () => {
-  const [user, loading] = useAuthState(auth);
-  console.log(user);
+  // const [user, loading] = useAuthState(auth);
+  // console.log(user);
 
   const handleAuthentication = (mode, email, password) => {
     mode === 'login' ? signInUser(auth, email, password) : signUpUser(auth, email, password);
