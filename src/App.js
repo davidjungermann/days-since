@@ -7,13 +7,14 @@ import './App.css';
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
+  console.log(user);
   return (
     <Router basename="/days-since">
       <div className="App">
         <>
           <Routes>
-            <Route path="/login" element={<UserForm mode="login" />} />
-            <Route path="/register" element={<UserForm mode="register" />} />
+            <Route path="/login" element={<UserForm mode="login" auth={auth} />} />
+            <Route path="/register" element={<UserForm mode="register" auth={auth} />} />
           </Routes>
         </>
       </div>

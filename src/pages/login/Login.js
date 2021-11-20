@@ -1,19 +1,12 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
-import { signInUser, signUpUser } from '../../auth/authServices';
 
-const UserForm = ({ mode, auth }) => {
+const UserForm = ({ mode, setEmail, setPassword, handleAuthentication }) => {
   const [formState] = useState(mode === 'login' ? 'Sign In' : 'Sign Up');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = () => {
-    mode === 'login' ? signInUser(auth, email, password) : signUpUser(auth, email, password);
-  };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={() => handleAuthentication(mode)}>
       <h1>{formState}</h1>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Control type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
