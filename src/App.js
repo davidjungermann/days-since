@@ -3,21 +3,18 @@ import Counter from './pages/counter/Counter';
 import UserForm from './pages/user-form/UserForm';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './db/firestore';
-import { signInUser, signUpUser } from './auth/authServices';
+import { signInUser, signUpUser, signOutUser } from './auth/authServices';
 import './App.css';
 
 const App = () => {
   const [user] = useAuthState(auth);
-  const navigate = useNavigate();
-
-  auth.onAuthStateChanged((user) => {
-    if (!user) {
-      navigate('/login');
-    }
-  });
 
   const handleAuthentication = (mode, email, password) => {
     mode === 'login' ? signInUser(auth, email, password) : signUpUser(auth, email, password);
+  };
+
+  const handleSignOut = () => {
+    signOutUser(auth);
   };
 
   return (
@@ -25,7 +22,7 @@ const App = () => {
       <div className="App">
         <>
           <Routes>
-            <Route path="/" element={<Counter />} />
+            <Route path="/" element={<Counter handleSignOut={handleSignOut} />} />
             <Route
               path="/login"
               element={<UserForm mode="login" handleAuthentication={handleAuthentication} />}
@@ -36,7 +33,6 @@ const App = () => {
             />
 
             <Route
-              exact
               path="/"
               render={() => {
                 return user ? <Navigate to="/" /> : <Navigate to="/login" />;

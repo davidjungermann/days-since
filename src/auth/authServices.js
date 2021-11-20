@@ -1,5 +1,4 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { auth } from '../db/firestore';
 
 const signUpUser = (auth, email, password) => {
   console.log(email, password);
@@ -23,7 +22,7 @@ const signInUser = (auth, email, password) => {
     });
 };
 
-const signOutUser = () => {
+const signOutUser = (auth) => {
   signOut(auth)
     .then(() => {})
     .catch((error) => {});

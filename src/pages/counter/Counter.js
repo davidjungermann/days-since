@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../db/firestore';
 import Emoji from '../../components/emoji/Emoji';
-import Logout from '../../components/logout/Logout';
+import Button from 'react-bootstrap/Button';
 import './Counter.css';
 
-const Counter = () => {
+const Counter = ({ handleSignOut }) => {
   const [counter, setCounter] = useState(null);
   useEffect(() => {
     (async () => {
@@ -46,6 +46,9 @@ const Counter = () => {
           <Emoji symbol="❌" fontSize={100} />
         </div>
       </div>
+      <Button variant="primary" onClick={handleSignOut}>
+        Sign Out
+      </Button>
     </React.Fragment>
   );
 };
