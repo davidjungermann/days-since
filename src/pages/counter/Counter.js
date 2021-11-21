@@ -1,4 +1,9 @@
-import { getCounter, setCounterValue, getCounterListener } from '../../api/counterRepository';
+import {
+  getCounter,
+  setCounterValue,
+  setStreakValue,
+  getCounterListener,
+} from '../../api/counterRepository';
 import React, { useState, useEffect } from 'react';
 import Emoji from '../../components/emoji/Emoji';
 import { Container, Row, Button, Col } from 'react-bootstrap';
@@ -6,11 +11,14 @@ import './Counter.css';
 
 const Counter = ({ handleSignOut, uid, email }) => {
   const [counter, setCounter] = useState(null);
+  const [streak, setStreak] = useState(null);
+
   useEffect(() => {
     if (uid) {
       (async () => {
         const counterRef = await getCounter(uid);
         setCounter(counterRef.data().value);
+        setStreak(counterRef.data().streak);
       })();
 
       return () => getCounterListener(setCounter);
@@ -19,9 +27,11 @@ const Counter = ({ handleSignOut, uid, email }) => {
 
   const handleIncrement = async () => {
     if (uid) {
-      setCounter(counter + 1);
+      const newValue = counter + 1;
+      setCounter(newValue);
       const counterRef = await getCounter(uid);
-      setCounterValue(counter + 1, counterRef.id);
+      setCounterValue(newValue, counterRef.id);
+      handleStreak(newValue, counterRef.id);
     }
   };
 
@@ -33,9 +43,11 @@ const Counter = ({ handleSignOut, uid, email }) => {
     }
   };
 
-  const handleStreak = async () => {
-    const counterRef = await getCounter(uid);
-    return counterRef.data().streak;
+  const handleStreak = async (newValue, uid) => {
+    if (counter > streak) {
+      setStreak(newValue);
+      setStreakValue(newValue, uid);
+    }
   };
 
   return (
@@ -44,7 +56,7 @@ const Counter = ({ handleSignOut, uid, email }) => {
         <Row>
           <Col>
             <h5>Longest Streak</h5>
-            {uid && <span>10</span>}
+            {uid && <span>{streak}</span>}
           </Col>
           <Col>
             <h2>Days Since 🔥</h2>

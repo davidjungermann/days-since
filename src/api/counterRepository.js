@@ -33,10 +33,17 @@ const setCounterValue = async (newValue, id) => {
   });
 };
 
+const setStreakValue = async (newValue, id) => {
+  const counterRef = doc(db, 'counters', id);
+  await updateDoc(counterRef, {
+    streak: newValue,
+  });
+};
+
 const getCounterListener = async (setCounter) => {
   const unsubscribe = onSnapshot(doc(db, 'counters', 'counter'), (doc) => {
     setCounter(doc.get('value'));
   });
   return unsubscribe;
 };
-export { createCounter, getCounter, setCounterValue, getCounterListener };
+export { createCounter, getCounter, setCounterValue, setStreakValue, getCounterListener };
