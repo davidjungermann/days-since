@@ -18,7 +18,7 @@ const App = () => {
       if (user) {
         navigate('/');
       } else {
-        navigate('/sign-up');
+        navigate('/sign-in');
       }
     });
     return () => unsubscribe();
