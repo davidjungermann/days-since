@@ -16,6 +16,7 @@ const createCounter = async (uid) => {
   await addDoc(collection(db, 'counters'), {
     value: 0,
     uid: uid,
+    streak: 0,
   });
 };
 
@@ -26,6 +27,8 @@ const getCounter = async (uid, type) => {
     return counters.docs[0].data().value;
   } else if (type === 'ref') {
     return counters.docs[0].id;
+  } else if (type === 'streak') {
+    return counters.docs[0].data().streak;
   }
 };
 

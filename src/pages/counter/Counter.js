@@ -6,7 +6,7 @@ import Emoji from '../../components/emoji/Emoji';
 import Button from 'react-bootstrap/Button';
 import './Counter.css';
 
-const Counter = ({ handleSignOut, uid }) => {
+const Counter = ({ handleSignOut, uid, email }) => {
   const [counter, setCounter] = useState(null);
   useEffect(() => {
     if (uid) {
@@ -15,10 +15,6 @@ const Counter = ({ handleSignOut, uid }) => {
         setCounter(counterValue);
       })();
 
-      // // TODO: Should be placed in the repo, but don't know how
-      // const unsubscribe = onSnapshot(doc(db, 'counters', 'counter'), (doc) => {
-      //   setCounter(doc.get('value'));
-      // });
       return () => getCounterListener(setCounter);
     }
   }, [uid]);
@@ -41,9 +37,22 @@ const Counter = ({ handleSignOut, uid }) => {
 
   return (
     <React.Fragment>
-      <div className="title">
-        <h1 className="heading">Days Since 🔥</h1>
-        <Emoji symbol="" fontSize={50} />
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">Longest streak</div>
+          <div class="col-sm">
+            <div className="title">
+              <h1 className="heading">Days Since 🔥</h1>
+              <Emoji symbol="" fontSize={50} />
+            </div>
+          </div>
+          <div class="col-sm">
+            {email && <span>{email}</span>}
+            <Button variant="primary" onClick={handleSignOut}>
+              Sign Out
+            </Button>
+          </div>
+        </div>
       </div>
       <h1 className="counter">{counter}</h1>
       <div className="increment-reset">
@@ -54,9 +63,6 @@ const Counter = ({ handleSignOut, uid }) => {
           <Emoji symbol="❌" fontSize={100} />
         </div>
       </div>
-      <Button variant="primary" onClick={handleSignOut}>
-        Sign Out
-      </Button>
     </React.Fragment>
   );
 };

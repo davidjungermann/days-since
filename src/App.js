@@ -51,7 +51,10 @@ const App = () => {
     <div className="App">
       <>
         <Routes>
-          <Route path="/" element={<Counter handleSignOut={handleSignOut} uid={user?.uid} />} />
+          <Route
+            path="/"
+            element={<Counter handleSignOut={handleSignOut} uid={user?.uid} email={user?.email} />}
+          />
           <Route
             path="/sign-in"
             element={<UserForm mode="sign-in" handleAuthentication={handleAuthentication} />}
