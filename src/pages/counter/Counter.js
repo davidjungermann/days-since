@@ -47,8 +47,7 @@ const Counter = ({ handleSignOut, uid, email }) => {
             {uid && <span>10</span>}
           </Col>
           <Col>
-            <h2>Days Since</h2>
-            <Emoji symbol="🔥" fontSize={100} />
+            <h2>Days Since 🔥</h2>
             <h1 className="counter">{counter}</h1>
             <div className="increment-reset">
               <div className="emoji-container" onClick={handleIncrement}>
