@@ -57,11 +57,11 @@ const Counter = ({ handleSignOut, uid, email }) => {
         <Row>
           <Col>
             <h5>Longest Streak</h5>
-            {uid && <span>{streak}</span>}
+            {uid && <h1>{streak}</h1>}
           </Col>
           <Col>
             <Row>
-              <h2>Days Since 🔥</h2>
+              <h2 className="title">Days Since 🔥</h2>
               <h1 className="counter">{counter}</h1>
               <div className="increment-reset">
                 <div className="icon-container" onClick={handleIncrement}>
