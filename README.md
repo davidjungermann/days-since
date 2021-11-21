@@ -5,9 +5,9 @@
 * Authentication - Done
 * Tying a counter to a user - Done
 * Streak length - Done
-* Responsive design - In progress
-* Replace the emojis
-* Private routes
+* Responsiveness - Done
+* Replace the emojis - Done
+* Private routes - In progress
   
 Optionals:
 * Selector for multiple environments
