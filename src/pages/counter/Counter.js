@@ -40,6 +40,7 @@ const Counter = ({ handleSignOut, uid, email }) => {
       <div class="container">
         <div class="row">
           <div class="col-sm">Longest streak</div>
+          {}
           <div class="col-sm">
             <div className="title">
               <h1 className="heading">Days Since 🔥</h1>
