@@ -5,7 +5,6 @@ import {
   getCounterListener,
 } from '../../api/counterRepository';
 import React, { useState, useEffect } from 'react';
-import Emoji from '../../components/emoji/Emoji';
 import { Container, Row, Button, Col } from 'react-bootstrap';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 import { ReactComponent as Cross } from '../../assets/cross.svg';
