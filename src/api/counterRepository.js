@@ -20,16 +20,17 @@ const createCounter = async (uid) => {
   });
 };
 
-const getCounter = async (uid, type) => {
+const getCounter = async (uid) => {
   const q = query(countersRef, where('uid', '==', uid));
   const counters = await getDocs(q);
-  if (type === 'value') {
-    return counters.docs[0].data().value;
-  } else if (type === 'ref') {
-    return counters.docs[0].id;
-  } else if (type === 'streak') {
-    return counters.docs[0].data().streak;
-  }
+  // if (type === 'value') {
+  //   return counters.docs[0].data().value;
+  // } else if (type === 'ref') {
+  //   return counters.docs[0].id;
+  // } else if (type === 'streak') {
+  //   return counters.docs[0].data().streak;
+  // }
+  return counters.docs[0];
 };
 
 const setCounterValue = async (newValue, id) => {

@@ -11,8 +11,8 @@ const Counter = ({ handleSignOut, uid, email }) => {
   useEffect(() => {
     if (uid) {
       (async () => {
-        const counterValue = await getCounter(uid, 'value');
-        setCounter(counterValue);
+        const counterRef = await getCounter(uid);
+        setCounter(counterRef.data().value);
       })();
 
       return () => getCounterListener(setCounter);
@@ -22,16 +22,16 @@ const Counter = ({ handleSignOut, uid, email }) => {
   const handleIncrement = async () => {
     if (uid) {
       setCounter(counter + 1);
-      const id = await getCounter(uid, 'ref');
-      setCounterValue(counter + 1, id);
+      const counterRef = await getCounter(uid);
+      setCounterValue(counter + 1, counterRef.id);
     }
   };
 
   const handleReset = async () => {
     if (uid) {
       setCounter(0);
-      const id = await getCounter(uid, 'ref');
-      setCounterValue(0, id);
+      const counterRef = await getCounter(uid);
+      setCounterValue(0, counterRef.id);
     }
   };
 
