@@ -72,7 +72,7 @@ const Counter = ({ handleSignOut, uid, email }) => {
             </div>
           </Col>
           <Col xs={{ order: 3 }} sm={{ order: 3 }} md={{ order: 3 }} lg={{ order: 3 }}>
-            {email && <h5>{email}</h5>}
+            <div className="email">{email && <h5>{email}</h5>}</div>
             <Button variant="primary" onClick={handleSignOut}>
               Sign Out
             </Button>
