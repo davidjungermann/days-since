@@ -12,7 +12,6 @@ const UserForm = ({ mode, handleAuthentication }) => {
   return (
     <Container className="user-form">
       <Form className="user-form">
-        <h1>{formState}</h1>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Control
             type="email"
