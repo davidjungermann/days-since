@@ -2,6 +2,7 @@
     display: inherit;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    padding: 20px;
   }
   
   .increment-reset {
@@ -9,6 +10,7 @@
     flex-wrap: nowrap;
     justify-content: space-evenly;
     user-select: none;
+    padding: 20px;
   }
   
   .heading {
@@ -29,6 +31,7 @@
     transition: opacity 0.5s ease-in-out;
     opacity: 1;
     font-size: 20px;
+    padding: 20px;
   }
   
   .icon-container:hover {

@@ -55,25 +55,23 @@ const Counter = ({ handleSignOut, uid, email }) => {
     <React.Fragment>
       <Container>
         <Row>
-          <Col>
+          <Col xs={{ order: 2 }} sm={{ order: 2 }} md={{ order: 1 }} lg={{ order: 1 }}>
             <h5>Longest Streak</h5>
             {uid && <h1>{streak}</h1>}
           </Col>
-          <Col>
-            <Row>
-              <h2 className="title">Days Since 🔥</h2>
-              <h1 className="counter">{counter}</h1>
-              <div className="increment-reset">
-                <div className="icon-container" onClick={handleIncrement}>
-                  <Plus className="icon" />
-                </div>
-                <div className="icon-container" onClick={handleReset}>
-                  <Cross className="icon" />
-                </div>
+          <Col xs={{ order: 1 }} sm={{ order: 1 }} md={{ order: 2 }} lg={{ order: 2 }}>
+            <h2 className="title">Days Since</h2>
+            <h1 className="counter">{counter}</h1>
+            <div className="increment-reset">
+              <div className="icon-container" onClick={handleIncrement}>
+                <Plus className="icon" />
               </div>
-            </Row>
+              <div className="icon-container" onClick={handleReset}>
+                <Cross className="icon" />
+              </div>
+            </div>
           </Col>
-          <Col>
+          <Col xs={{ order: 3 }} sm={{ order: 3 }} md={{ order: 3 }} lg={{ order: 3 }}>
             {email && <h5>{email}</h5>}
             <Button variant="primary" onClick={handleSignOut}>
               Sign Out
