@@ -4,9 +4,9 @@
 ## TODOs
 * Authentication - Done
 * Tying a counter to a user - Done
-* Streak length
+* Streak length - Done
+* Responsive design - In progress
 * Replace the emojis
-* Responsive design
 * Private routes
   
 Optionals:

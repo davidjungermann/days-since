@@ -44,7 +44,7 @@ const Counter = ({ handleSignOut, uid, email }) => {
   };
 
   const handleStreak = async (newValue, uid) => {
-    if (counter > streak) {
+    if (newValue > streak) {
       setStreak(newValue);
       setStreakValue(newValue, uid);
     }
