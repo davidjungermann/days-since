@@ -24,40 +24,27 @@ const App = () => {
     return () => unsubscribe();
   }, [navigate]);
 
-  const handleAuthentication = (mode, email, password) => {
+  const handleAuthentication = async (mode, email, password) => {
     mode === 'sign-in'
       ? handleSignInUser(auth, email, password)
       : handleSignUpUser(auth, email, password);
   };
 
-  const handleSignUpUser = (auth, email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((response) => {
-        createUser(response.user);
-        createCounter(response.user.uid);
-      })
-      // TODO: Implement error handling
-      .catch((error) => {
-        console.log(error.code, error.message);
-      });
+  // TODO: Error handling
+  const handleSignUpUser = async (auth, email, password) => {
+    const response = await createUserWithEmailAndPassword(auth, email, password);
+    createUser(response.user);
+    createCounter(response.user.uid);
   };
 
-  const handleSignInUser = (auth, email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((response) => {
-        return response.user;
-      })
-      .catch((error) => {
-        // TODO: Implement error handling
-        console.log(error.code, error.message);
-      });
+  // TODO: Error handling
+  const handleSignInUser = async (auth, email, password) => {
+    return await signInWithEmailAndPassword(auth, email, password);
   };
 
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {})
-      // TODO: Implement error handling
-      .catch((error) => {});
+  // TODO: Error handling
+  const handleSignOut = async () => {
+    await signOut(auth);
   };
 
   return (

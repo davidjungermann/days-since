@@ -19,15 +19,18 @@ const createCounter = async (uid) => {
   });
 };
 
-const getCounterValue = async (uid) => {
+const getCounter = async (uid, type) => {
   const q = query(countersRef, where('uid', '==', uid));
   const counters = await getDocs(q);
-  const value = counters.docs[0].data().value;
-  return value;
+  if (type === 'value') {
+    return counters.docs[0].data().value;
+  } else if (type === 'ref') {
+    return counters.docs[0].id;
+  }
 };
 
-const setCounterValue = async (newValue) => {
-  const counterRef = doc(db, 'counters', 'counter');
+const setCounterValue = async (newValue, id) => {
+  const counterRef = doc(db, 'counters', id);
   await updateDoc(counterRef, {
     value: newValue,
   });
@@ -39,4 +42,4 @@ const getCounterListener = async (setCounter) => {
   });
   return unsubscribe;
 };
-export { createCounter, getCounterValue, setCounterValue, getCounterListener };
+export { createCounter, getCounter, setCounterValue, getCounterListener };

@@ -1,4 +1,4 @@
-import { getCounterValue, setCounterValue, getCounterListener } from '../../api/counterRepository';
+import { getCounter, setCounterValue, getCounterListener } from '../../api/counterRepository';
 import React, { useState, useEffect } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../db/firestore';
@@ -11,7 +11,7 @@ const Counter = ({ handleSignOut, uid }) => {
   useEffect(() => {
     if (uid) {
       (async () => {
-        const counterValue = await getCounterValue(uid);
+        const counterValue = await getCounter(uid, 'value');
         setCounter(counterValue);
       })();
 
@@ -23,14 +23,20 @@ const Counter = ({ handleSignOut, uid }) => {
     }
   }, [uid]);
 
-  const handleIncrement = () => {
-    setCounter(counter + 1);
-    setCounterValue(counter + 1);
+  const handleIncrement = async () => {
+    if (uid) {
+      setCounter(counter + 1);
+      const id = await getCounter(uid, 'ref');
+      setCounterValue(counter + 1, id);
+    }
   };
 
-  const handleReset = () => {
-    setCounter(0);
-    setCounterValue(0);
+  const handleReset = async () => {
+    if (uid) {
+      setCounter(0);
+      const id = await getCounter(uid, 'ref');
+      setCounterValue(0, id);
+    }
   };
 
   return (
