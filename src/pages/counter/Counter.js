@@ -9,17 +9,19 @@ import './Counter.css';
 const Counter = ({ handleSignOut, uid }) => {
   const [counter, setCounter] = useState(null);
   useEffect(() => {
-    (async () => {
-      const counterValue = await getCounterValue('OESCHn8zXgNIbkQ5wfOgFinHytn2');
-      setCounter(counterValue);
-    })();
+    if (uid) {
+      (async () => {
+        const counterValue = await getCounterValue(uid);
+        setCounter(counterValue);
+      })();
 
-    // TODO: Should be placed in the repo, but don't know how
-    const unsubscribe = onSnapshot(doc(db, 'counters', 'counter'), (doc) => {
-      setCounter(doc.get('value'));
-    });
-    return () => unsubscribe();
-  }, []);
+      // TODO: Should be placed in the repo, but don't know how
+      const unsubscribe = onSnapshot(doc(db, 'counters', 'counter'), (doc) => {
+        setCounter(doc.get('value'));
+      });
+      return () => unsubscribe();
+    }
+  }, [uid]);
 
   const handleIncrement = () => {
     setCounter(counter + 1);

@@ -12,13 +12,13 @@ const createCounter = async (uid) => {
 };
 
 const getCounterValue = async (uid) => {
-  console.log(uid);
   const q = query(countersRef, where('uid', '==', uid));
   const counters = await getDocs(q);
-  return counters.docs[0].data().uid;
+  const value = counters.docs[0].data().value;
+  return value;
 };
 
-const setCounterValue = async (newValue) => {
+const setCounterValue = async (uid, newValue) => {
   const counterRef = doc(db, 'counters', 'counter');
   await updateDoc(counterRef, {
     value: newValue,
