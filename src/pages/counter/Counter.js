@@ -9,7 +9,6 @@ import { Container, Row, Button, Col } from 'react-bootstrap';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 import { ReactComponent as Cross } from '../../assets/cross.svg';
 import './Counter.css';
-import { BounceLoader } from 'react-spinners';
 
 const Counter = ({ handleSignOut, uid, email }) => {
   const [counter, setCounter] = useState(null);
@@ -54,7 +53,7 @@ const Counter = ({ handleSignOut, uid, email }) => {
 
   return (
     <React.Fragment>
-      {counter && (
+      {counter !== null && (
         <Container>
           <Row>
             <Col xs={{ order: 2 }} sm={{ order: 2 }} md={{ order: 1 }} lg={{ order: 1 }}>
