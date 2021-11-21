@@ -6,7 +6,7 @@
   
   .increment-reset {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-evenly;
     user-select: none;
   }
@@ -19,7 +19,7 @@
     font-size: 200px;
   }
   
-  .emoji-container {
+  .icon-container {
     margin-left: 2em;
     margin-right: 2em;
     -webkit-transition: opacity 0.5s ease-in-out;
@@ -28,8 +28,14 @@
     -o-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
     opacity: 1;
+    font-size: 20px;
   }
   
-  .emoji-container:hover {
+  .icon-container:hover {
     opacity: 0.5;
+  }
+
+  .icon {
+    height: 20vh;
+    width: 20vw;
   }

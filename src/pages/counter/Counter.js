@@ -7,6 +7,8 @@ import {
 import React, { useState, useEffect } from 'react';
 import Emoji from '../../components/emoji/Emoji';
 import { Container, Row, Button, Col } from 'react-bootstrap';
+import { ReactComponent as Plus } from '../../assets/plus.svg';
+import { ReactComponent as Cross } from '../../assets/cross.svg';
 import './Counter.css';
 
 const Counter = ({ handleSignOut, uid, email }) => {
@@ -59,16 +61,18 @@ const Counter = ({ handleSignOut, uid, email }) => {
             {uid && <span>{streak}</span>}
           </Col>
           <Col>
-            <h2>Days Since 🔥</h2>
-            <h1 className="counter">{counter}</h1>
-            <div className="increment-reset">
-              <div className="emoji-container" onClick={handleIncrement}>
-                <Emoji symbol="✅" fontSize={100} />
+            <Row>
+              <h2>Days Since 🔥</h2>
+              <h1 className="counter">{counter}</h1>
+              <div className="increment-reset">
+                <div className="icon-container" onClick={handleIncrement}>
+                  <Plus className="icon" />
+                </div>
+                <div className="icon-container" onClick={handleReset}>
+                  <Cross className="icon" />
+                </div>
               </div>
-              <div className="emoji-container" onClick={handleReset}>
-                <Emoji symbol="❌" fontSize={100} />
-              </div>
-            </div>
+            </Row>
           </Col>
           <Col>
             {email && <h5>{email}</h5>}
