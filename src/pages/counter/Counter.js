@@ -9,6 +9,7 @@ import { Container, Row, Button, Col } from 'react-bootstrap';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 import { ReactComponent as Cross } from '../../assets/cross.svg';
 import './Counter.css';
+import { BounceLoader } from 'react-spinners';
 
 const Counter = ({ handleSignOut, uid, email }) => {
   const [counter, setCounter] = useState(null);
@@ -53,32 +54,35 @@ const Counter = ({ handleSignOut, uid, email }) => {
 
   return (
     <React.Fragment>
-      <Container>
-        <Row>
-          <Col xs={{ order: 2 }} sm={{ order: 2 }} md={{ order: 1 }} lg={{ order: 1 }}>
-            <h5>Longest Streak</h5>
-            {uid && <h1>{streak}</h1>}
-          </Col>
-          <Col xs={{ order: 1 }} sm={{ order: 1 }} md={{ order: 2 }} lg={{ order: 2 }}>
-            <h2 className="title">Days Since</h2>
-            <h1 className="counter">{counter}</h1>
-            <div className="increment-reset">
-              <div className="icon-container" onClick={handleIncrement}>
-                <Plus className="icon" />
+      {counter && (
+        <Container>
+          <Row>
+            <Col xs={{ order: 2 }} sm={{ order: 2 }} md={{ order: 1 }} lg={{ order: 1 }}>
+              <h5>Longest Streak</h5>
+              {uid && <h1>{streak}</h1>}
+            </Col>
+            <Col xs={{ order: 1 }} sm={{ order: 1 }} md={{ order: 2 }} lg={{ order: 2 }}>
+              <h2 className="title">Days Since</h2>
+              <div className="counter-container">{counter}</div>
+
+              <div className="increment-reset">
+                <div className="icon-container" onClick={handleIncrement}>
+                  <Plus className="icon" />
+                </div>
+                <div className="icon-container" onClick={handleReset}>
+                  <Cross className="icon" />
+                </div>
               </div>
-              <div className="icon-container" onClick={handleReset}>
-                <Cross className="icon" />
-              </div>
-            </div>
-          </Col>
-          <Col xs={{ order: 3 }} sm={{ order: 3 }} md={{ order: 3 }} lg={{ order: 3 }}>
-            <div className="email">{email && <h5>{email}</h5>}</div>
-            <Button variant="primary" onClick={handleSignOut}>
-              Sign Out
-            </Button>
-          </Col>
-        </Row>
-      </Container>
+            </Col>
+            <Col xs={{ order: 3 }} sm={{ order: 3 }} md={{ order: 3 }} lg={{ order: 3 }}>
+              <div className="email">{email && <h5>{email}</h5>}</div>
+              <Button variant="primary" onClick={handleSignOut}>
+                Sign Out
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+      )}
     </React.Fragment>
   );
 };

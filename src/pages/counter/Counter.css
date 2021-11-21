@@ -17,6 +17,10 @@
     margin-right: 20px;
   }
   
+  .counter-container {
+    font-size: 200px;
+  }
+
   .counter {
     font-size: 200px;
   }
@@ -41,4 +45,11 @@
   .icon {
     height: 20vh;
     width: 20vw;
+  }
+
+  .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
   }
