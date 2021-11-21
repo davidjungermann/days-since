@@ -10,7 +10,7 @@ const UserForm = ({ mode, handleAuthentication }) => {
   const [password, setPassword] = useState('');
 
   return (
-    <Container>
+    <Container className="user-form">
       <Form className="user-form">
         <h1>{formState}</h1>
         <Form.Group className="mb-3" controlId="formBasicEmail">
