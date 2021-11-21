@@ -1,6 +1,14 @@
 import { db } from '../db/firestore';
-import { doc, collection, query, where, updateDoc, getDocs, addDoc } from 'firebase/firestore';
-import { connectAuthEmulator } from '@firebase/auth';
+import {
+  doc,
+  collection,
+  query,
+  where,
+  updateDoc,
+  getDocs,
+  addDoc,
+  onSnapshot,
+} from 'firebase/firestore';
 
 const countersRef = collection(db, 'counters');
 
@@ -18,11 +26,17 @@ const getCounterValue = async (uid) => {
   return value;
 };
 
-const setCounterValue = async (uid, newValue) => {
+const setCounterValue = async (newValue) => {
   const counterRef = doc(db, 'counters', 'counter');
   await updateDoc(counterRef, {
     value: newValue,
   });
 };
 
-export { createCounter, getCounterValue, setCounterValue };
+const getCounterListener = async (setCounter) => {
+  const unsubscribe = onSnapshot(doc(db, 'counters', 'counter'), (doc) => {
+    setCounter(doc.get('value'));
+  });
+  return unsubscribe;
+};
+export { createCounter, getCounterValue, setCounterValue, getCounterListener };

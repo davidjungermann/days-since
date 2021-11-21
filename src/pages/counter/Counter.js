@@ -1,4 +1,4 @@
-import { getCounterValue, setCounterValue } from '../../api/counterRepository';
+import { getCounterValue, setCounterValue, getCounterListener } from '../../api/counterRepository';
 import React, { useState, useEffect } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../db/firestore';
@@ -15,11 +15,11 @@ const Counter = ({ handleSignOut, uid }) => {
         setCounter(counterValue);
       })();
 
-      // TODO: Should be placed in the repo, but don't know how
-      const unsubscribe = onSnapshot(doc(db, 'counters', 'counter'), (doc) => {
-        setCounter(doc.get('value'));
-      });
-      return () => unsubscribe();
+      // // TODO: Should be placed in the repo, but don't know how
+      // const unsubscribe = onSnapshot(doc(db, 'counters', 'counter'), (doc) => {
+      //   setCounter(doc.get('value'));
+      // });
+      return () => getCounterListener(setCounter);
     }
   }, [uid]);
 
