@@ -8,6 +8,7 @@
 * Responsiveness - Done
 * Replace the emojis - Done
 * Private routes - In progress
+* Input validation for sign in and sign up
   
 Optionals:
 * Selector for multiple environments
