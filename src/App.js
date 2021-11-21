@@ -6,11 +6,12 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 import { createUser } from './api/userRepository';
 import './App.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createCounter } from './api/counterRepository';
 
 const App = () => {
   const [user] = useAuthState(auth);
+  const [uid, setUid] = useState('');
   const navigate = useNavigate();
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -34,6 +35,7 @@ const App = () => {
       .then((response) => {
         createUser(response.user);
         createCounter(response.user.uid);
+        setUid(response.user.uid);
       })
       // TODO: Implement error handling
       .catch((error) => {
@@ -44,6 +46,7 @@ const App = () => {
   const handleSignInUser = (auth, email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
+        setUid(response.user.uid);
         return response.user;
       })
       .catch((error) => {
@@ -63,7 +66,7 @@ const App = () => {
     <div className="App">
       <>
         <Routes>
-          <Route path="/" element={<Counter handleSignOut={handleSignOut} />} />
+          <Route path="/" element={<Counter handleSignOut={handleSignOut} uid={uid} />} />
           <Route
             path="/sign-in"
             element={<UserForm mode="sign-in" handleAuthentication={handleAuthentication} />}

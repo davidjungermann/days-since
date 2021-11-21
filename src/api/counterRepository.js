@@ -1,17 +1,21 @@
 import { db } from '../db/firestore';
-import { doc, collection, updateDoc, getDoc, addDoc } from 'firebase/firestore';
+import { doc, collection, query, where, updateDoc, getDocs, addDoc } from 'firebase/firestore';
+import { connectAuthEmulator } from '@firebase/auth';
+
+const countersRef = collection(db, 'counters');
 
 const createCounter = async (uid) => {
   await addDoc(collection(db, 'counters'), {
     value: 0,
-    user: uid,
+    uid: uid,
   });
 };
 
-const getCounterValue = async () => {
-  const counterRef = doc(db, 'counters', 'counter');
-  const counterDoc = await getDoc(counterRef);
-  return counterDoc.get('value');
+const getCounterValue = async (uid) => {
+  console.log(uid);
+  const q = query(countersRef, where('uid', '==', uid));
+  const counters = await getDocs(q);
+  return counters.docs[0].data().uid;
 };
 
 const setCounterValue = async (newValue) => {

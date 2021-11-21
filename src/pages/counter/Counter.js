@@ -6,11 +6,11 @@ import Emoji from '../../components/emoji/Emoji';
 import Button from 'react-bootstrap/Button';
 import './Counter.css';
 
-const Counter = ({ handleSignOut, auth }) => {
+const Counter = ({ handleSignOut, uid }) => {
   const [counter, setCounter] = useState(null);
   useEffect(() => {
     (async () => {
-      const counterValue = await getCounterValue();
+      const counterValue = await getCounterValue('OESCHn8zXgNIbkQ5wfOgFinHytn2');
       setCounter(counterValue);
     })();
 
