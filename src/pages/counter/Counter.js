@@ -1,9 +1,7 @@
 import { getCounter, setCounterValue, getCounterListener } from '../../api/counterRepository';
 import React, { useState, useEffect } from 'react';
-import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '../../db/firestore';
 import Emoji from '../../components/emoji/Emoji';
-import Button from 'react-bootstrap/Button';
+import { Container, Row, Button, Col } from 'react-bootstrap';
 import './Counter.css';
 
 const Counter = ({ handleSignOut, uid, email }) => {
@@ -35,35 +33,40 @@ const Counter = ({ handleSignOut, uid, email }) => {
     }
   };
 
+  const handleStreak = async () => {
+    const counterRef = await getCounter(uid);
+    return counterRef.data().streak;
+  };
+
   return (
     <React.Fragment>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm">Longest streak</div>
-          {}
-          <div class="col-sm">
-            <div className="title">
-              <h1 className="heading">Days Since 🔥</h1>
-              <Emoji symbol="" fontSize={50} />
+      <Container>
+        <Row>
+          <Col>
+            <h5>Longest Streak</h5>
+            {uid && <span>10</span>}
+          </Col>
+          <Col>
+            <h2>Days Since</h2>
+            <Emoji symbol="🔥" fontSize={100} />
+            <h1 className="counter">{counter}</h1>
+            <div className="increment-reset">
+              <div className="emoji-container" onClick={handleIncrement}>
+                <Emoji symbol="✅" fontSize={100} />
+              </div>
+              <div className="emoji-container" onClick={handleReset}>
+                <Emoji symbol="❌" fontSize={100} />
+              </div>
             </div>
-          </div>
-          <div class="col-sm">
-            {email && <span>{email}</span>}
+          </Col>
+          <Col>
+            {email && <h5>{email}</h5>}
             <Button variant="primary" onClick={handleSignOut}>
               Sign Out
             </Button>
-          </div>
-        </div>
-      </div>
-      <h1 className="counter">{counter}</h1>
-      <div className="increment-reset">
-        <div className="emoji-container" onClick={handleIncrement}>
-          <Emoji symbol="✅" fontSize={100} />
-        </div>
-        <div className="emoji-container" onClick={handleReset}>
-          <Emoji symbol="❌" fontSize={100} />
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </React.Fragment>
   );
 };
