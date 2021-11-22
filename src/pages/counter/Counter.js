@@ -54,13 +54,27 @@ const Counter = ({ handleSignOut, uid, email }) => {
   return (
     <React.Fragment>
       {counter !== null && (
-        <Container>
+        <Container fluid>
           <Row>
-            <Col xs={{ order: 2 }} sm={{ order: 2 }} md={{ order: 1 }} lg={{ order: 1 }}>
+            <Col
+              xs={{ order: 2 }}
+              sm={{ order: 2 }}
+              md={{ order: 1 }}
+              lg={{ order: 1 }}
+              xl={{ order: 1 }}
+              xxl={{ order: 1 }}
+            >
               <h5>Longest Streak</h5>
               {uid && <h1>{streak}</h1>}
             </Col>
-            <Col xs={{ order: 1 }} sm={{ order: 1 }} md={{ order: 2 }} lg={{ order: 2 }}>
+            <Col
+              xs={{ order: 1 }}
+              sm={{ order: 1 }}
+              md={{ order: 2 }}
+              lg={{ order: 2 }}
+              xl={{ order: 2 }}
+              xxl={{ order: 2 }}
+            >
               <h2 className="title">Days Since</h2>
               <div className="counter-container">{counter}</div>
 
@@ -73,7 +87,14 @@ const Counter = ({ handleSignOut, uid, email }) => {
                 </div>
               </div>
             </Col>
-            <Col xs={{ order: 3 }} sm={{ order: 3 }} md={{ order: 3 }} lg={{ order: 3 }}>
+            <Col
+              xs={{ order: 3 }}
+              sm={{ order: 3 }}
+              md={{ order: 3 }}
+              lg={{ order: 3 }}
+              xl={{ order: 3 }}
+              xxl={{ order: 3 }}
+            >
               <div className="email">{email && <h5>{email}</h5>}</div>
               <Button variant="primary" onClick={handleSignOut}>
                 Sign Out

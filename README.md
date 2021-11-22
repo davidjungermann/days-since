@@ -7,7 +7,7 @@
 * Streak length - Done
 * Responsiveness - Done
 * Replace the emojis - Done
-* Private routes - In progress
+* Private routes - In progress. Right now no way to sign up, only sign in. 
 * Input validation for sign in and sign up
   
 Optionals:
