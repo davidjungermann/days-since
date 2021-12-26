@@ -10,7 +10,6 @@ const UserForm = ({ mode, handleAuthentication, setRegister, errorMessage, setEr
   const [formState, setFormState] = useState(mode === 'sign-in' ? 'Sign In' : 'Sign Up');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [valid, setValid] = useState(true);
 
   const flipFormState = () => {
     return mode === 'sign-in' ? 'Sign Up' : 'Sign In';
@@ -67,7 +66,7 @@ const UserForm = ({ mode, handleAuthentication, setRegister, errorMessage, setEr
           {formState}
         </Button>
         <Container className="error-message-container">
-          {!valid && <span className="error-message">{errorMessage}</span>}
+          <span className="error-message">{errorMessage}</span>
         </Container>
         <h5 className="info-text">{infoText()}</h5>
         <Button className="mode-button" variant="secondary" onClick={handleNavigation}>

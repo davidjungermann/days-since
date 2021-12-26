@@ -34,7 +34,6 @@ const App = () => {
       : handleSignUpUser(auth, email, password);
   };
 
-  // TODO: Error handling
   const handleSignUpUser = async (auth, email, password) => {
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password);
@@ -45,7 +44,6 @@ const App = () => {
     }
   };
 
-  // TODO: Error handling
   const handleSignInUser = async (auth, email, password) => {
     try {
       return await signInWithEmailAndPassword(auth, email, password);
