@@ -5,13 +5,12 @@ import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './UserForm.css';
 
-const UserForm = ({ mode, handleAuthentication, setRegister }) => {
+const UserForm = ({ mode, handleAuthentication, setRegister, errorMessage, setErrorMessage }) => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState(mode === 'sign-in' ? 'Sign In' : 'Sign Up');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [valid, setValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const flipFormState = () => {
     return mode === 'sign-in' ? 'Sign Up' : 'Sign In';

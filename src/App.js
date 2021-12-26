@@ -12,6 +12,7 @@ import { createCounter } from './api/counterRepository';
 const App = () => {
   const [user] = useAuthState(auth);
   const [register, setRegister] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -35,17 +36,25 @@ const App = () => {
 
   // TODO: Error handling
   const handleSignUpUser = async (auth, email, password) => {
-    const response = await createUserWithEmailAndPassword(auth, email, password);
-    createUser(response.user);
-    createCounter(response.user.uid);
+    try {
+      const response = await createUserWithEmailAndPassword(auth, email, password);
+      createUser(response.user);
+      createCounter(response.user.uid);
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
 
   // TODO: Error handling
   const handleSignInUser = async (auth, email, password) => {
-    return await signInWithEmailAndPassword(auth, email, password);
+    try {
+      return await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.log(error.message);
+      setErrorMessage(error.message);
+    }
   };
 
-  // TODO: Error handling
   const handleSignOut = async () => {
     await signOut(auth);
   };
@@ -65,6 +74,8 @@ const App = () => {
                 mode="sign-in"
                 handleAuthentication={handleAuthentication}
                 setRegister={setRegister}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
               />
             }
           />
@@ -75,6 +86,8 @@ const App = () => {
                 mode="sign-up"
                 handleAuthentication={handleAuthentication}
                 setRegister={setRegister}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
               />
             }
           />
