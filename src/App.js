@@ -20,7 +20,7 @@ const App = () => {
         navigate('/');
       } else if (register === 'sign-up') {
         navigate('/sign-up');
-      } else if (register === 'sign-in') {
+      } else {
         navigate('/sign-in');
       }
     });
