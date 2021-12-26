@@ -11,15 +11,18 @@ import { createCounter } from './api/counterRepository';
 
 const App = () => {
   const [user] = useAuthState(auth);
+  const [register, setRegister] = useState(false);
 
   const navigate = useNavigate();
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigate('/');
-      } else {
-        navigate('/sign-in');
-      }
+      // if (user) {
+      //   console.log('Logged in');
+      //   navigate('/');
+      // } else {
+      //   console.log('Logged out');
+      //   navigate('/sign-in');
+      // }
     });
     return () => unsubscribe();
   }, [navigate]);
@@ -57,11 +60,23 @@ const App = () => {
           />
           <Route
             path="/sign-in"
-            element={<UserForm mode="sign-in" handleAuthentication={handleAuthentication} />}
+            element={
+              <UserForm
+                mode="sign-in"
+                handleAuthentication={handleAuthentication}
+                setRegister={setRegister}
+              />
+            }
           />
           <Route
             path="/sign-up"
-            element={<UserForm mode="sign-up" handleAuthentication={handleAuthentication} />}
+            element={
+              <UserForm
+                mode="sign-up"
+                handleAuthentication={handleAuthentication}
+                setRegister={setRegister}
+              />
+            }
           />
         </Routes>
       </>
