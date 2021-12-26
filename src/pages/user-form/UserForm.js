@@ -36,10 +36,8 @@ const UserForm = ({ mode, handleAuthentication, setRegister, errorMessage, setEr
     }
 
     if (email.length === 0) {
-      setValid(false);
       setErrorMessage('Input an email address');
     } else if (password.length === 0) {
-      setValid(false);
       setErrorMessage('Input a password');
     }
   };
