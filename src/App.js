@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import Counter from './pages/counter/Counter';
 import UserForm from './pages/user-form/UserForm';
 import { auth } from './db/firestore';
@@ -59,7 +59,7 @@ const App = () => {
   return (
     <div className="App">
       <>
-        <Routes>
+        <Routes basename="days-since">
           <Route
             path="/"
             element={<Counter handleSignOut={handleSignOut} uid={user?.uid} email={user?.email} />}
@@ -88,6 +88,7 @@ const App = () => {
               />
             }
           />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </>
     </div>
