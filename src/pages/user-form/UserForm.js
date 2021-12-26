@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './UserForm.css';
 
 const UserForm = ({ mode, handleAuthentication, setRegister }) => {
@@ -10,6 +10,8 @@ const UserForm = ({ mode, handleAuthentication, setRegister }) => {
   const [formState, setFormState] = useState(mode === 'sign-in' ? 'Sign In' : 'Sign Up');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [valid, setValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const flipFormState = () => {
     return mode === 'sign-in' ? 'Sign Up' : 'Sign In';
@@ -30,6 +32,20 @@ const UserForm = ({ mode, handleAuthentication, setRegister }) => {
     return mode === 'sign-in' ? "If you don't have an account" : 'If you already have an account';
   };
 
+  const handleSubmit = () => {
+    if (email && password) {
+      handleAuthentication(mode, email, password);
+    }
+
+    if (email.length === 0) {
+      setValid(false);
+      setErrorMessage('Input an email address');
+    } else if (password.length === 0) {
+      setValid(false);
+      setErrorMessage('Input a password');
+    }
+  };
+
   return (
     <Container className="user-form">
       <Form className="user-form">
@@ -48,9 +64,12 @@ const UserForm = ({ mode, handleAuthentication, setRegister }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" onClick={() => handleAuthentication(mode, email, password)}>
+        <Button variant="primary" onClick={handleSubmit}>
           {formState}
         </Button>
+        <Container className="error-message-container">
+          {!valid && <span className="error-message">{errorMessage}</span>}
+        </Container>
         <h5 className="info-text">{infoText()}</h5>
         <Button className="mode-button" variant="secondary" onClick={handleNavigation}>
           {flipFormState()}

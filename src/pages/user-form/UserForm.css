@@ -13,5 +13,20 @@
 }
 
 .info-text {
-    margin-top: 2em;
+    margin-top: 3em;
+}
+
+.error-message-container {
+    margin-top: 1em;
+}
+
+.error-message {
+    color: #d44b3b;
+    font-size: 18px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
