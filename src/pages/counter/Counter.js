@@ -6,6 +6,7 @@ import {
 } from '../../api/counterRepository';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Button, Col } from 'react-bootstrap';
+import { emojisplosion } from 'emojisplosion';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 import { ReactComponent as Cross } from '../../assets/cross.svg';
 import './Counter.css';
@@ -48,6 +49,9 @@ const Counter = ({ handleSignOut, uid, email }) => {
     if (newValue > streak) {
       setStreak(newValue);
       setStreakValue(newValue, uid);
+      emojisplosion({
+        emojis: ['✅', '🎉', '🥳', '💯', '🍻', '💥', '🔥'],
+      });
     }
   };
 

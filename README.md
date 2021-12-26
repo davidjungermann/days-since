@@ -8,14 +8,12 @@
 * Responsiveness - Done
 * Replace the emojis - Done
 * Private routes - Done
-* Input validation for sign in and sign up
+* Input validation for sign in and sign up - Done
   
 Optionals:
+* Animations
+* Notes 
 * Selector for multiple environments
-* Blame list for errors
 * Goldstars for streak length
-* Streak length
-* Sweet animations
-* SVG meteor animations
-* Github integration for blame
+* Github integration
 * Jira integration
