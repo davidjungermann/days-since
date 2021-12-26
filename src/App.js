@@ -16,16 +16,16 @@ const App = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      // if (user) {
-      //   console.log('Logged in');
-      //   navigate('/');
-      // } else {
-      //   console.log('Logged out');
-      //   navigate('/sign-in');
-      // }
+      if (user) {
+        navigate('/');
+      } else if (register === 'sign-up') {
+        navigate('/sign-up');
+      } else if (register === 'sign-in') {
+        navigate('/sign-in');
+      }
     });
     return () => unsubscribe();
-  }, [navigate]);
+  }, [navigate, register]);
 
   const handleAuthentication = async (mode, email, password) => {
     mode === 'sign-in'
