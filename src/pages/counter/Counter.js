@@ -5,13 +5,13 @@ import {
   getCounterListener,
 } from '../../api/counterRepository';
 
-import { getBatman, getRobin } from '../../api/supportRepository';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Button, Col } from 'react-bootstrap';
 import { emojisplosion } from 'emojisplosion';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 import { ReactComponent as Cross } from '../../assets/cross.svg';
 import './Counter.css';
+import SupportDevelopers from '../support/SupportDevelopers';
 
 const Counter = ({ handleSignOut, uid, email }) => {
   const [counter, setCounter] = useState(null);
@@ -23,11 +23,6 @@ const Counter = ({ handleSignOut, uid, email }) => {
         const counterRef = await getCounter(uid);
         setCounter(counterRef.data().value);
         setStreak(counterRef.data().streak);
-
-        const batman = await getBatman();
-        const robin = await getRobin();
-        console.log(batman);
-        console.log(robin);
       })();
 
       return () => getCounterListener(setCounter);
@@ -77,6 +72,7 @@ const Counter = ({ handleSignOut, uid, email }) => {
             >
               <h5>Longest Streak</h5>
               {uid && <h1>{streak}</h1>}
+              <SupportDevelopers />
             </Col>
             <Col
               xs={{ order: 1 }}
