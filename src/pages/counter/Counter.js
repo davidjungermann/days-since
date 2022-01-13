@@ -72,7 +72,7 @@ const Counter = ({ handleSignOut, uid, email }) => {
             >
               <h5>Longest Streak</h5>
               {uid && <h1>{streak}</h1>}
-              <SupportDevelopers />
+              <SupportDevelopers uid={uid} />
             </Col>
             <Col
               xs={{ order: 1 }}

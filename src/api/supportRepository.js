@@ -1,16 +1,24 @@
 import { db } from '../db/firestore';
-import { doc, collection, getDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 
 const supportRef = doc(db, 'support', 'current');
 
-const getBatman = async () => {
+const getBatman = async (uid) => {
   const support = await getDoc(supportRef);
+  const data = support.data();
   return support.data().batman;
 };
 
-const getRobin = async () => {
+const getRobin = async (uid) => {
   const support = await getDoc(supportRef);
+  const data = support.data();
   return support.data().robin;
 };
 
-export { getBatman, getRobin };
+const getSupport = async (uid) => {
+  const support = await getDoc(supportRef);
+  const data = support.data();
+  return data.uid === uid;
+};
+
+export { getBatman, getRobin, getSupport };
