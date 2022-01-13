@@ -4,6 +4,8 @@ import {
   setStreakValue,
   getCounterListener,
 } from '../../api/counterRepository';
+
+import { getBatman, getRobin } from '../../api/supportRepository';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Button, Col } from 'react-bootstrap';
 import { emojisplosion } from 'emojisplosion';
@@ -21,6 +23,11 @@ const Counter = ({ handleSignOut, uid, email }) => {
         const counterRef = await getCounter(uid);
         setCounter(counterRef.data().value);
         setStreak(counterRef.data().streak);
+
+        const batman = await getBatman();
+        const robin = await getRobin();
+        console.log(batman);
+        console.log(robin);
       })();
 
       return () => getCounterListener(setCounter);

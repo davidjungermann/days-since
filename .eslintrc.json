@@ -5,9 +5,14 @@
       "prettier/prettier": ["error"]
     },
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "modules": true
+        }
     },
     "env": {
         "es6": true
-    }
+    },
+    "parser": "babel-eslint"
 }
