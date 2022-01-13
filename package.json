@@ -72,7 +72,7 @@
   },
   "main": "functions/index.js",
   "lint-staged": {
-    "${npm_package_file_pattern}": "eslint --cache --fix"
+    "*.js": "eslint --cache --fix"
   },
   "husky": {
     "hooks": {
