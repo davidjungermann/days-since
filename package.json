@@ -3,7 +3,7 @@
   "name": "days-since",
   "version": "0.1.0",
   "private": true,
-  "file_pattern": "src/**/*.{ts,tsx,js,jsx,css,scss}",
+  "file_pattern": "{src,functions}/**/*.{ts,tsx,js,jsx,css,scss}",
   "engines": {
     "node": "16"
   },
