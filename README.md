@@ -1,5 +1,7 @@
+## https://davidjungermann.com/days-since
+
 ## Deploy
-`yarn deploy`, uses Github Pages.
+`yarn deploy`
 
 ## TODOs
-* Rolling schedule for Batman and Robin
+
