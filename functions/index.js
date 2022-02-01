@@ -27,7 +27,7 @@ exports.scheduledFunctionCrontab = functions
       .firestore()
       .collection('support')
       .doc('current')
-      .set({
+      .update({
         batman: developers[(((indexBatman + 1) % length) + length) % length],
         robin: developers[(((indexRobin + 1) % length) + length) % length],
       });
