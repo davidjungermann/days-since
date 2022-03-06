@@ -9,7 +9,7 @@ exports.scheduledFunctionCrontab = functions
   .pubsub.schedule('0 6 * * 1')
   .timeZone('Europe/Stockholm')
   .onRun(async (context) => {
-    const developers = ['Mansour', 'Vinay', 'David', 'Selma'];
+    const developers = ['Mansour', 'Vinay', 'David', 'Selma', 'Mehul'];
     const length = developers.length;
 
     // Get current support developers
