@@ -9,7 +9,7 @@ exports.scheduledFunctionCrontab = functions
   .pubsub.schedule('0 6 * * 1')
   .timeZone('Europe/Stockholm')
   .onRun(async (context) => {
-    const developers = ['Vinay', 'David', 'Selma', 'Mehul', 'Jonathan', 'Alfred'];
+    const developers = ['Vinay', 'David', 'Selma', 'Mehul', 'Jonathan'];
     const length = developers.length;
 
     // Get current support developers
@@ -21,14 +21,16 @@ exports.scheduledFunctionCrontab = functions
     let indexBatman = developers.indexOf(currentBatman);
     let indexRobin = developers.indexOf(currentRobin);
 
+    indexBatman === indexRobin
+      ? (robin = developers[(((indexRobin + 2) % length) + length) % length])
+      : (robin = developers[(((indexRobin + 1) % length) + length) % length]);
+
+    let batman = developers[(((indexBatman + 1) % length) + length) % length];
+
     //Set the new support developers by incrementing the index
     // Circular indexing for array index insertion
-    return await admin
-      .firestore()
-      .collection('support')
-      .doc('current')
-      .update({
-        batman: developers[(((indexBatman + 1) % length) + length) % length],
-        robin: developers[(((indexRobin + 1) % length) + length) % length],
-      });
+    return await admin.firestore().collection('support').doc('current').update({
+      batman: batman,
+      robin: robin,
+    });
   });

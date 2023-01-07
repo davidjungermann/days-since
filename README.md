@@ -1,7 +1,7 @@
 ## https://davidjungermann.com/days-since
 
-## Deploy
+## Deploy React App
 `yarn deploy`
 
-## TODOs
-
+## Deploy Support rotation Cloud Function
+` firebase deploy --only functions`
