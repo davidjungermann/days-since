@@ -15,10 +15,16 @@ const getRobin = async (uid) => {
   return support.data().robin;
 };
 
+const getCaptain = async (uid) => {
+  const support = await getDoc(supportRef);
+  const data = support.data();
+  return support.data().releaser;
+};
+
 const getSupport = async (uid) => {
   const support = await getDoc(supportRef);
   const data = support.data();
   return data.uid === uid;
 };
 
-export { getBatman, getRobin, getSupport };
+export { getBatman, getRobin, getCaptain, getSupport };

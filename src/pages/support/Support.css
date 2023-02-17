@@ -1,3 +1,9 @@
 .support-container {
     margin-top: 50px;
 }
+
+.support-icon {
+    height: 110px;
+    width: 110px;
+    margin-top: 1em;
+}
