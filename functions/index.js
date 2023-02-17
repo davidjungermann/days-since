@@ -16,6 +16,9 @@ exports.scheduledFunctionCrontab = functions
     const support = await admin.firestore().collection('support').doc('current').get();
     const currentBatman = support.data().batman;
     const currentRobin = support.data().robin;
+    const currentCaptain = support.data().captain;
+    const currentWeek = support.data().week;
+    const nextWeek = currentWeek + 1;
 
     // Find the index of current support developers
     let indexBatman = developers.indexOf(currentBatman);
@@ -29,8 +32,23 @@ exports.scheduledFunctionCrontab = functions
 
     //Set the new support developers by incrementing the index
     // Circular indexing for array index insertion
-    return await admin.firestore().collection('support').doc('current').update({
+    await admin.firestore().collection('support').doc('current').update({
       batman: batman,
       robin: robin,
     });
+
+    if (currentWeek === 3) {
+      let indexCaptain = developers.indexOf(currentCaptain);
+      let captain = developers[(((indexCaptain + 1) % length) + length) % length];
+      await admin.firestore().collection('support').doc('current').update({
+        week: 1,
+        captain: captain,
+      });
+    } else {
+      await admin.firestore().collection('support').doc('current').update({
+        week: nextWeek,
+      });
+    }
+
+    return 'Ok';
   });

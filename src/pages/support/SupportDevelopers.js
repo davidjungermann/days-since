@@ -35,11 +35,11 @@ const SupportDevelopers = ({ uid }) => {
       {renderSupport && (
         <Container fluid className="support-container">
           <Batman className="support-icon" />
-          <h5>{batman}</h5>
+          <h4>{batman}</h4>
           <Robin className="support-icon" />
-          <h5>{robin}</h5>
+          <h4>{robin}</h4>
           <Captain className="support-icon" />
-          <h5>{captain}</h5>
+          <h4>{captain}</h4>
         </Container>
       )}
     </React.Fragment>

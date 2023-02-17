@@ -4,4 +4,4 @@
 `yarn deploy`
 
 ## Deploy Support rotation Cloud Function
-` firebase deploy --only functions`
+`firebase deploy --only functions`

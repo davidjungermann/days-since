@@ -18,7 +18,7 @@ const getRobin = async (uid) => {
 const getCaptain = async (uid) => {
   const support = await getDoc(supportRef);
   const data = support.data();
-  return support.data().releaser;
+  return support.data().captain;
 };
 
 const getSupport = async (uid) => {
