@@ -2,7 +2,6 @@
     display: inherit;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    padding: 20px;
   }
   
   .increment-reset {
@@ -10,32 +9,24 @@
     flex-wrap: nowrap;
     justify-content: space-evenly;
     user-select: none;
-    padding: 20px;
-  }
-  
-  .heading {
-    margin-right: 20px;
   }
   
   .counter-container {
-    font-size: 200px;
+    font-size: 8em;
   }
 
   .counter {
-    font-size: 200px;
+    font-size: 2em;
   }
   
   .icon-container {
-    margin-left: 2em;
-    margin-right: 2em;
     -webkit-transition: opacity 0.5s ease-in-out;
     -moz-transition: opacity 0.5s ease-in-out;
     -ms-transition: opacity 0.5s ease-in-out;
     -o-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
     opacity: 1;
-    font-size: 20px;
-    padding: 20px;
+    font-size: 1em;
   }
   
   .icon-container:hover {
@@ -51,4 +42,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .streak-value {
+    margin-bottom: 1em;
   }

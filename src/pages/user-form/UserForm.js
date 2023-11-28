@@ -5,7 +5,13 @@ import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './UserForm.css';
 
-const UserForm = ({ mode, handleAuthentication, setRegister, errorMessage, setErrorMessage }) => {
+export const UserForm = ({
+  mode,
+  handleAuthentication,
+  setRegister,
+  errorMessage,
+  setErrorMessage,
+}) => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState(mode === 'sign-in' ? 'Sign In' : 'Sign Up');
   const [email, setEmail] = useState('');
@@ -74,5 +80,3 @@ const UserForm = ({ mode, handleAuthentication, setRegister, errorMessage, setEr
     </Container>
   );
 };
-
-export default UserForm;

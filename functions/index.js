@@ -8,12 +8,13 @@ exports.scheduledFunctionCrontab = functions
   .region('europe-west1')
   .pubsub.schedule('0 6 * * 1')
   .timeZone('Europe/Stockholm')
-  .onRun(async (context) => {
+  .onRun(async (context, uid = 'ZRlzaNHnfnRTeE7OydcLrFdzBWY2') => {
+    // Default to 'current' if no UID is provided
     const developers = ['David', 'Mehul', 'Jonathan', 'Stephane'];
     const length = developers.length;
 
     // Get current support developers
-    const support = await admin.firestore().collection('support').doc('current').get();
+    const support = await admin.firestore().collection('support').doc(uid).get();
     const currentBatman = support.data().batman;
     const currentRobin = support.data().robin;
     const currentCaptain = support.data().captain;
@@ -32,7 +33,7 @@ exports.scheduledFunctionCrontab = functions
 
     //Set the new support developers by incrementing the index
     // Circular indexing for array index insertion
-    await admin.firestore().collection('support').doc('current').update({
+    await admin.firestore().collection('support').doc(uid).update({
       batman: batman,
       robin: robin,
     });
@@ -40,12 +41,12 @@ exports.scheduledFunctionCrontab = functions
     if (currentWeek === 3) {
       let indexCaptain = developers.indexOf(currentCaptain);
       let captain = developers[(((indexCaptain + 1) % length) + length) % length];
-      await admin.firestore().collection('support').doc('current').update({
+      await admin.firestore().collection('support').doc(uid).update({
         week: 1,
         captain: captain,
       });
     } else {
-      await admin.firestore().collection('support').doc('current').update({
+      await admin.firestore().collection('support').doc(uid).update({
         week: nextWeek,
       });
     }

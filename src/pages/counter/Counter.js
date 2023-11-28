@@ -11,9 +11,8 @@ import { emojisplosion } from 'emojisplosion';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 import { ReactComponent as Cross } from '../../assets/cross.svg';
 import './Counter.css';
-import SupportDevelopers from '../support/SupportDevelopers';
 
-const Counter = ({ handleSignOut, uid, email }) => {
+export const Counter = ({ uid }) => {
   const [counter, setCounter] = useState(null);
   const [streak, setStreak] = useState(null);
 
@@ -61,57 +60,21 @@ const Counter = ({ handleSignOut, uid, email }) => {
     <React.Fragment>
       {counter !== null && (
         <Container fluid>
-          <Row>
-            <Col
-              xs={{ order: 2 }}
-              sm={{ order: 2 }}
-              md={{ order: 1 }}
-              lg={{ order: 1 }}
-              xl={{ order: 1 }}
-              xxl={{ order: 1 }}
-            >
-              <h5>Longest Streak</h5>
-              {uid && <h1>{streak}</h1>}
-              <SupportDevelopers uid={uid} />
-            </Col>
-            <Col
-              xs={{ order: 1 }}
-              sm={{ order: 1 }}
-              md={{ order: 2 }}
-              lg={{ order: 2 }}
-              xl={{ order: 2 }}
-              xxl={{ order: 2 }}
-            >
-              <h2 className="title">Days Since</h2>
-              <div className="counter-container">{counter}</div>
+          <h5>Longest Streak</h5>
+          {uid && <h1 className="streak-value">{streak}</h1>}
 
-              <div className="increment-reset">
-                <div className="icon-container" onClick={handleIncrement}>
-                  <Plus className="icon" />
-                </div>
-                <div className="icon-container" onClick={handleReset}>
-                  <Cross className="icon" />
-                </div>
-              </div>
-            </Col>
-            <Col
-              xs={{ order: 3 }}
-              sm={{ order: 3 }}
-              md={{ order: 3 }}
-              lg={{ order: 3 }}
-              xl={{ order: 3 }}
-              xxl={{ order: 3 }}
-            >
-              <div className="email">{email && <h5>{email}</h5>}</div>
-              <Button variant="primary" onClick={handleSignOut}>
-                Sign Out
-              </Button>
-            </Col>
-          </Row>
+          <div className="counter-container">{counter}</div>
+
+          <div className="increment-reset">
+            <div className="icon-container" onClick={handleIncrement}>
+              <Plus className="icon" />
+            </div>
+            <div className="icon-container" onClick={handleReset}>
+              <Cross className="icon" />
+            </div>
+          </div>
         </Container>
       )}
     </React.Fragment>
   );
 };
-
-export default Counter;
