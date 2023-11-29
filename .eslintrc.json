@@ -9,10 +9,14 @@
         "sourceType": "module",
         "ecmaFeatures": {
           "modules": true
-        }
+        },
+        "requireConfigFile": false,
+        "babelOptions": {
+          "presets": ["@babel/preset-react"]
+       }
     },
     "env": {
         "es6": true
     },
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
 }
