@@ -2,7 +2,6 @@ import { getAgile, getDaily, getRetro } from '../../api/agileRepository';
 import React, { useState, useEffect } from 'react';
 import { ReactComponent as Batman } from '../../assets/batman.svg';
 import { ReactComponent as Robin } from '../../assets/robin.svg';
-import { ReactComponent as Captain } from '../../assets/captain.svg';
 import { Container } from 'react-bootstrap';
 
 export const Agile = ({ uid }) => {
