@@ -1,0 +1,22 @@
+/* Custom margins for titles, icons, and names */
+.agile-title {
+    margin-bottom: 0.5rem; /* Space below the title */
+  }
+  
+  .agile-icon {
+    margin: 1rem 0; /* Space above and below the icon */
+    height: 4em;
+    width: 4em;
+  }
+  
+  .agile-name {
+    margin-bottom: 1.5rem; /* Space below the name */
+  }
+  
+  /* Margin between units for larger screens */
+  @media (min-width: 768px) {
+    .agile-unit {
+      margin-right: 2rem; /* Space to the right of each unit */
+    }
+  }
+  

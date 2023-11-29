@@ -1,8 +1,9 @@
-import { getAgile, getDaily, getRetro } from '../../api/agileRepository';
 import React, { useState, useEffect } from 'react';
-import { ReactComponent as Batman } from '../../assets/batman.svg';
-import { ReactComponent as Robin } from '../../assets/robin.svg';
-import { Container } from 'react-bootstrap';
+import { getAgile, getDaily, getRetro } from '../../api/agileRepository';
+import { ReactComponent as Daily } from '../../assets/daily.svg';
+import { ReactComponent as Retro } from '../../assets/retro.svg';
+import { Container, Row, Col } from 'react-bootstrap';
+import './Agile.css';
 
 export const Agile = ({ uid }) => {
   const [daily, setDaily] = useState(null);
@@ -12,25 +13,32 @@ export const Agile = ({ uid }) => {
     if (uid) {
       (async () => {
         let support = await getAgile(uid);
-
         if (support) {
-          let daily = await getDaily(uid);
-          let retro = await getRetro(uid);
-          setDaily(daily);
-          setRetro(retro);
+          setDaily(await getDaily(uid));
+          setRetro(await getRetro(uid));
         }
       })();
     }
-  }, []);
+  }, [uid]); // Ensure uid is a dependency
 
   return (
-    <React.Fragment>
-      <Container fluid className="support-container">
-        <Batman className="support-icon" />
-        <h4>{daily}</h4>
-        <Robin className="support-icon" />
-        <h4>{retro}</h4>
-      </Container>
-    </React.Fragment>
+    <Container className="agile-container">
+      <Row>
+        <Col xs={12} md={6}>
+          <div className="agile-unit">
+            <h2>Standup</h2>
+            <Daily className="agile-icon" />
+            <h4>{daily}</h4>
+          </div>
+        </Col>
+        <Col xs={12} md={6}>
+          <div className="agile-unit">
+            <h2>Retro</h2>
+            <Retro className="agile-icon" />
+            <h4>{retro}</h4>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };

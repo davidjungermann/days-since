@@ -6,8 +6,7 @@ admin.initializeApp();
 
 exports.agile = functions
   .region('europe-west1')
-  //.pubsub.schedule('0 6 * * 1')
-  .pubsub.schedule('* * * * *')
+  .pubsub.schedule('0 6 * * 1')
   .timeZone('Europe/Stockholm')
   .onRun(async (context) => {
     const uid = 'EftL8OyZ9ucTJyCarI3PR3vENkt2';
