@@ -42,7 +42,7 @@ export const Root = ({ handleSignOut, uid, email }) => {
         ))}
       </Row>
       <Row>
-        <Col md={{ span: 2, offset: 0 }}>
+        <Col className="fixed-bottom" md={{ span: 2, offset: 0 }}>
           <Logout handleSignOut={handleSignOut} email={email} />
         </Col>
       </Row>
