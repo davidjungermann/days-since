@@ -1,12 +1,18 @@
 const functions = require('firebase-functions');
+const { WebClient } = require('@slack/web-api');
 
 // The Firebase Admin SDK to access Firestore.
 const admin = require('firebase-admin');
 admin.initializeApp();
+const slackClient = new WebClient(functions.config().slack.token);
+
+console.log('Slack token: ' + functions.config().slack.token);
+console.log('Slack channel: ' + functions.config().slack.channel);
 
 exports.agile = functions
   .region('europe-west1')
-  .pubsub.schedule('0 6 * * 1')
+  //.pubsub.schedule('0 6 * * 1')
+  .pubsub.schedule('* * * * *')
   .timeZone('Europe/Stockholm')
   .onRun(async (context) => {
     const uid = 'EftL8OyZ9ucTJyCarI3PR3vENkt2';
@@ -54,6 +60,12 @@ exports.agile = functions
     await admin.firestore().collection('agile').doc(uid).update({
       daily: newDaily,
       retro: newRetro,
+    });
+
+    // Example: Sending a message to a channel
+    await slackClient.chat.postMessage({
+      channel: functions.config().slack.channel,
+      text: `New daily host is ${newDaily}, and new retro host is ${newRetro}.`,
     });
 
     return 'Ok';
