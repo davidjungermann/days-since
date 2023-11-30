@@ -1,25 +1,58 @@
 const functions = require('firebase-functions');
-const { WebClient } = require('@slack/web-api');
-
-// The Firebase Admin SDK to access Firestore.
 const admin = require('firebase-admin');
-admin.initializeApp();
+
+const { WebClient } = require('@slack/web-api');
 const slackClient = new WebClient(functions.config().slack.token);
 
-console.log('Slack token: ' + functions.config().slack.token);
-console.log('Slack channel: ' + functions.config().slack.channel);
+admin.initializeApp();
+
+const postMessage = async (newDaily, newRetro, currentRetro) => {
+  if (newRetro !== currentRetro) {
+    retroMessage = `*Retro* - ${newRetro}`;
+  } else {
+    retroMessage = `*Retro* - ${currentRetro} (no change this week)`;
+  }
+
+  await slackClient.chat.postMessage({
+    channel: functions.config().slack.channel,
+    text:
+      `New daily host is ${newDaily}.` +
+      (newRetro !== currentRetro ? ` New retro host is ${newRetro}.` : ''),
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: 'Good morning :sunny:',
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `This week's hosts are:\n*Standup* - ${newDaily}\n${retroMessage}`,
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: 'See more <https://davidjungermann.com/days-since|here>',
+        },
+      },
+    ],
+  });
+};
 
 exports.agile = functions
   .region('europe-west1')
-  //.pubsub.schedule('0 6 * * 1')
-  .pubsub.schedule('* * * * *')
+  .pubsub.schedule('0 8 * * 1')
   .timeZone('Europe/Stockholm')
   .onRun(async (context) => {
-    const uid = 'EftL8OyZ9ucTJyCarI3PR3vENkt2';
+    const uid = functions.config().firestore.uid;
     // Get current agile state
     const agile = await admin.firestore().collection('agile').doc(uid).get();
 
-    // Default to 'current' if no UID is provided
     const developers = agile.data().rotation;
     const length = developers.length;
 
@@ -62,11 +95,7 @@ exports.agile = functions
       retro: newRetro,
     });
 
-    // Example: Sending a message to a channel
-    await slackClient.chat.postMessage({
-      channel: functions.config().slack.channel,
-      text: `New daily host is ${newDaily}, and new retro host is ${newRetro}.`,
-    });
+    postMessage(newDaily, newRetro, currentRetro);
 
     return 'Ok';
   });
