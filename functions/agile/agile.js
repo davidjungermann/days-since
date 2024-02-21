@@ -60,7 +60,7 @@ const postOmniMessage = async (newDaily) => {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Facilitator is*: ${newDaily}`,
+          text: `This week's facilitator is: *${newDaily}*`,
         },
       },
     ],
